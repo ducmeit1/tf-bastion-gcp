@@ -57,3 +57,8 @@ module "bastion" {
     preemptible = true
 }
 ```
+
+```shell
+terraform plan
+terraform apply --auto-approve
+```
