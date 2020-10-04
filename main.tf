@@ -8,14 +8,12 @@ terraform {
 }
 
 resource "google_service_account" "bastion_host" {
-  count        = 1
   project      = var.gcp_project
   account_id   = "bastion-host"
   display_name = "Service account for bastion host"
 }
 
 resource "google_service_account_iam_binding" "bastion_sa_user" {
-  count              = 1
   service_account_id = google_service_account.bastion_host.id
   role               = "roles/iam.serviceAccountUser"
   members            = var.members
