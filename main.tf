@@ -21,14 +21,14 @@ resource "google_service_account_iam_binding" "bastion_sa_user" {
 
 resource "google_project_iam_member" "bastion_sa_bindings" {
   for_each = toset(var.service_account_roles)
-  project = var.project
+  project = var.gcp_project
   role    = each.value
   member  = format("serviceAccount:%s", google_service_account.bastion_host.email)
 }
 
 resource "google_compute_instance" "bastion_host" {
   name = var.name
-  project = var.project
+  project = var.gcp_project
   machine_type = var.machine_type
   zone = var.gcp_zone
   tags = var.network_tags

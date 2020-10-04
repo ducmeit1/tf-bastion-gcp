@@ -105,8 +105,14 @@ variable "network_target_ports" {
     default = ["22", "80", "443", "8888"]
 }
 
-variable "additional_ports" {
+variable "additional_iap_ports" {
   description = "A list of additional ports/ranges to open access to on the instances from IAP."
   type        = list(string)
   default     = []
+}
+
+variable "startup_script" {
+  description = "Render a startup script with a template."
+  type = string
+  default     = ""
 }
