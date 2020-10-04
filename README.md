@@ -17,7 +17,7 @@ This module will will:
 
 ```hcl
 module "bastion" {
-    source = "git::git@github.com:ducmeit1/tf-bastion-gcp.git/?ref=master"
+    source = "github.com/ducmeit1/tf-bastion-gcp"
     name = "bastion-vm"
     gcp_project = "driven-stage-269911"
     gcp_region = "asia-southeast1"
@@ -35,7 +35,7 @@ module "bastion" {
 
 ```hcl
 module "network" {
-    source = "git::git@github.com:ducmeit1/tf-network-gcp.git/?ref=master"
+    source = "github.com/ducmeit1/tf-network-gcp"
     gcp_project = "driven-stage-269911"
     gcp_region = "asia-southeast1"
     gcp_network = "shared-network"
@@ -44,7 +44,7 @@ module "network" {
 }
 
 module "bastion" {
-    source = "git::git@github.com:ducmeit1/tf-bastion-gcp.git/?ref=master"
+    source = "github.com/ducmeit1/tf-bastion-gcp"
     name = "bastion-vm"
     gcp_project = "driven-stage-269911"
     gcp_region = "asia-southeast1"
