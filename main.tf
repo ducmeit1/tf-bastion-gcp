@@ -65,6 +65,7 @@ resource "google_compute_instance" "bastion_host" {
 }
 
 data "google_compute_network" "network" {
+  project = var.gcp_project
   name = var.gcp_network
 }
 

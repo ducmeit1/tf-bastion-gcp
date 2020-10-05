@@ -37,9 +37,9 @@ resource "google_compute_firewall" "allow_ssh_to_bastion" {
   source_tags = var.network_tags
 }
 
-resource "google_compute_firewall" "allow_ssh_from_bastion" {
+resource "google_compute_firewall" "allow_connect_from_bastion" {
     project = var.gcp_project
-    name = "allow-ssh-from-bastion"
+    name = "allow-connect-from-bastion"
     network = data.google_compute_network.network.name
     direction = "INGRESS"
 
@@ -49,7 +49,7 @@ resource "google_compute_firewall" "allow_ssh_from_bastion" {
 
     allow {
         protocol = "tcp"
-        ports = ["22", "80", "443", "8888", "5601", "9200"]
+        ports = toset(concat(["22"], var.network_target_ports))
     }
     
     source_tags = var.network_tags
