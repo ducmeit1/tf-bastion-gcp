@@ -49,7 +49,7 @@ resource "google_compute_firewall" "allow_connect_from_bastion" {
 
     allow {
         protocol = "tcp"
-        ports = toset(concat(["22"], var.network_target_ports))
+        ports = var.network_target_ports
     }
     
     source_tags = var.network_tags
