@@ -52,7 +52,7 @@ variable "disk_size_gb" {
     default     = 10
 }
 
-variable "image_family" {
+variable "family_image" {
     description = "The name of GCP machine imago to launch the machine."
     type        = string
     default     = "debian-9-stretch-v20200805"
