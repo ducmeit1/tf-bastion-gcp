@@ -1,6 +1,6 @@
 resource "google_compute_firewall" "allow_from_iap_to_instances" {
   project = var.gcp_project
-  name    = "allow-ssh-from-iap-to-instances"
+  name    = format("allow-ssh-from-iap-to-instances-by-%s", var.name)
   network = var.gcp_network
 
   allow {
@@ -25,7 +25,7 @@ resource "google_iap_tunnel_instance_iam_binding" "enable_iap" {
 
 resource "google_compute_firewall" "allow_ssh_to_bastion" {
   project = var.gcp_project
-  name    = "allow-ssh-to-bastion"
+  name    = format("allow-ssh-to-bastion-%s", var.name)
   network = data.google_compute_network.network.name
   direction = "INGRESS"
 
@@ -39,7 +39,7 @@ resource "google_compute_firewall" "allow_ssh_to_bastion" {
 
 resource "google_compute_firewall" "allow_connect_from_bastion" {
     project = var.gcp_project
-    name = "allow-connect-from-bastion"
+    name = format("allow-connect-from-bastion-%s", var.name)
     network = data.google_compute_network.network.name
     direction = "INGRESS"
 
