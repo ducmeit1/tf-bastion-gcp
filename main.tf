@@ -35,8 +35,8 @@ resource "google_compute_instance" "bastion_host" {
   }
 
   network_interface {
-    network = var.gcp_network
-    subnetwork = var.gcp_subnetwork
+    network = data.google_compute_network.network.self_link
+    subnetwork = data.google_compute_subnetwork.subnetwork.self_link
     network_ip = var.network_ip_address
   }
 
@@ -56,4 +56,14 @@ resource "google_compute_instance" "bastion_host" {
   }
 
   metadata_startup_script = var.startup_script
+}
+
+data "google_compute_network" "network" {
+  project = var.gcp_project
+  name = var.gcp_network
+}
+
+data "google_compute_subnetwork" "subnetwork" {
+  name = var.gcp_subnetwork
+  region = var.gcp_region
 }
