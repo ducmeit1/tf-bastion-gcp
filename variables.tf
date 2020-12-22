@@ -34,12 +34,6 @@ variable "name" {
     default     = "bastion"
 }
 
-variable "members" {
-  description = "List of members in the standard GCP form: user:{email}, serviceAccount:{email}, group:{email}"
-  type        = list(string)
-  default     = []
-}
-
 variable "machine_type" {
     description = "The name of machine type which is used to launch the resource."
     type        = string

@@ -15,14 +15,6 @@ resource "google_compute_firewall" "allow_from_iap_to_instances" {
   target_service_accounts = [google_service_account.bastion_host.email]
 }
 
-resource "google_iap_tunnel_instance_iam_binding" "enable_iap" {
-  project  = var.gcp_project
-  zone     = var.gcp_zone
-  instance = google_compute_instance.bastion_host.name
-  role     = "roles/iap.tunnelResourceAccessor"
-  members  = var.members
-}
-
 resource "google_compute_firewall" "allow_ssh_to_bastion" {
   project = var.gcp_project
   name    = format("allow-ssh-to-bastion-%s", var.name)

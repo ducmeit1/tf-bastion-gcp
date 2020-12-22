@@ -39,8 +39,13 @@ module "network" {
     gcp_project = "driven-stage-269911"
     gcp_region = "asia-southeast1"
     gcp_network = "shared-network"
-    gcp_subnetwork = "shared-subnet"
-    total_nat_ips = 1
+    gcp_subnetwork = [
+    {
+        name            = "shared-subnet",
+        region          = "asia-east1"
+        ip_cidr_range   = "10.126.0.0/24"
+    }
+    ]
 }
 
 module "bastion" {
@@ -50,10 +55,10 @@ module "bastion" {
     gcp_region = "asia-southeast1"
     gcp_zone = "asia-southeast1-a"
     gcp_network = module.network.network_name
-    gcp_subnetwork = "module.network.subnetwork_name"
-    machine_type = "n1-standard-1"
-    disk_size_gb = 20
-    image_family = "ubuntu-1804-lts"
+    gcp_subnetwork = module.network.subnetwork.[0].name
+    machine_type = "g1-small"
+    disk_size_gb = 10
+    family_image = "ubuntu-1804-lts"
     preemptible = true
 }
 ```
