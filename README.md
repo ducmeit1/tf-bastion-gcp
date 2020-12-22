@@ -55,7 +55,7 @@ module "bastion" {
     gcp_region = "asia-southeast1"
     gcp_zone = "asia-southeast1-a"
     gcp_network = module.network.network_name
-    gcp_subnetwork = module.network.subnetwork.[0].name
+    gcp_subnetwork = module.network.subnetwork[0].name
     machine_type = "g1-small"
     disk_size_gb = 10
     family_image = "ubuntu-1804-lts"
